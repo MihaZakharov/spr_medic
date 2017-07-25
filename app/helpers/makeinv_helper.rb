@@ -1,0 +1,2 @@
+module MakeinvHelper
+end

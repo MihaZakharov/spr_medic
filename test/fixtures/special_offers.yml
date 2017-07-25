@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price1: 9.99
+  prt_currQnt: 1
+  pharmacy_id: 1
+  date_god: MyString
+  ext_id: 1
+
+two:
+  price1: 9.99
+  prt_currQnt: 1
+  pharmacy_id: 1
+  date_god: MyString
+  ext_id: 1

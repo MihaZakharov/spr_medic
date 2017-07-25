@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> Поступил новый заказ, <%= @invoice.id %></h1>
+    <p>
+      Вам пришел заказ от покупателя: <%= @invoice.email %>.<br>
+    </p>
+    <p>
+      Перейти по сслыке что бы открыть заказ: <%= @url %>.
+    </p>
+    <p>Спасибо за просмотр заказа. Приятного дня!</p>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  mnn: MyText
+  composition: MyText
+  indic: MyText
+  unindic: MyString
+  method: MyText
+  limit: MyText
+  overdose: MyText
+  precaut: MyText
+  pregnan: MyString
+  text: MyString
+  sideact: MyText
+  pharmact: MyText
+  pharmak: MyText
+  actonorg: MyText
+  compsprop: MyText
+  specguid: MyText
+  charactres: MyText
+  drugform: MyText
+  clinic: MyText
+  direct: MyText
+  inst: MyText
+  recomend: MyText
+  comment: MyText
+  manufact: MyText
+  liter: MyText
+
+two:
+  id: 
+  mnn: MyText
+  composition: MyText
+  indic: MyText
+  unindic: MyString
+  method: MyText
+  limit: MyText
+  overdose: MyText
+  precaut: MyText
+  pregnan: MyString
+  text: MyString
+  sideact: MyText
+  pharmact: MyText
+  pharmak: MyText
+  actonorg: MyText
+  compsprop: MyText
+  specguid: MyText
+  charactres: MyText
+  drugform: MyText
+  clinic: MyText
+  direct: MyText
+  inst: MyText
+  recomend: MyText
+  comment: MyText
+  manufact: MyText
+  liter: MyText

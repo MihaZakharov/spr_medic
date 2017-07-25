@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  val_fact_1: 9.99
+  val_fact_2: 9.99
+  percent_fact: 
+  val_inv_1: 9.99
+  val_inv_2: 9.99
+  percent_inv: 9.99
+  group_id: 1
+
+two:
+  val_fact_1: 9.99
+  val_fact_2: 9.99
+  percent_fact: 
+  val_inv_1: 9.99
+  val_inv_2: 9.99
+  percent_inv: 9.99
+  group_id: 1

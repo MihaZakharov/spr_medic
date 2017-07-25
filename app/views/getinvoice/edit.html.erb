@@ -1,0 +1,57 @@
+<h1>Обработка заказа <%= @inv.id %>. <%= @inv.place%></h1>
+
+<%= form_tag(controller: "getinvoice", action: "change", method: "get") do %>
+   <%= label_tag(:idinv, "Статус") %>
+   <%= hidden_field_tag(:id, @inv.id) %>
+    <%= select_tag(:value, options_for_select([["Новый","new"],["Просмотрен",1] ,["Обработан",2],["Отгружен",3] ],selected:@inv.status))  %>
+   <%= submit_tag("Обработать")%>
+<% end %>
+
+<p>
+  <strong>Email:</strong>
+  <%= @inv.email %>
+</p>
+
+<p>
+  <strong>Телефон:</strong>
+  <%= @inv.phone_invoice %>
+</p>
+
+<p>
+  <strong>Сумма заказа:</strong>
+  <% if @inv.inv == 1 %>
+  <% @summ = @inv.summ %>
+  <% elsif @inv.inv == 2 %>
+  <% @summ = @inv.summ_n %>
+  <% end %>
+  <%= @summ %>
+</p>
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Наименование товара</th>
+      <th>Количество</th>
+      <th>Цена</th>
+      <th>Сумма</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dtlinv.each do |invoice| %>
+      <tr>
+        <td><%= invoice[:name] %></td>
+        <td><%= invoice[:qnt] %></td>
+        <% if @inv.inv == 1 %>
+        <% @price = invoice[:price1] %>
+        <% elsif @inv.inv == 2 %>
+        <% @price = invoice[:price] %>
+        <% end %>
+        <td><%= @price %></td>
+        <td><%= @price * invoice[:qnt]  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Назад', invoice_path %>

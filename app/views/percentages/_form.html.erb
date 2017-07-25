@@ -1,0 +1,33 @@
+<%= bootstrap_form_for(percentage) do |f| %>
+  <% if percentage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(percentage.errors.count, "error") %> prohibited this percentage from being saved:</h2>
+
+      <ul>
+      <% percentage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group fr_percentage">
+    <%= f.text_field :val_fact_1, label:"Диапазон факт от:" %>
+
+    <%= f.text_field :val_fact_2, label:"Диапазон факт до:" %>
+
+    <%= f.text_field :percent_fact, label:"Процент наценки факт" %>
+
+    <%= f.text_field :val_inv_1, label:"Диапазон заказ от:" %>
+
+    <%= f.text_field :val_inv_2, label:"Диапазон заказ до:" %>
+
+    <%= f.text_field :percent_inv, label:"Процент наценки заказ" %>
+
+    <%= f.select :group_id, Group.where('kls_parent=1613').order("NAME ASC").collect{ |group| [group.name, group.id] }, {label: "Группа товара"}%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Подтвердить новый диапазон" %>
+  </div>
+<% end %>

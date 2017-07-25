@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goodsid: MyString
+  price: 
+  qnt: 
+  invoice_id: MyString
+
+two:
+  goodsid: MyString
+  price: 
+  qnt: 
+  invoice_id: MyString

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Val fact 1:</strong>
+  <%= @percentage.val_fact_1 %>
+</p>
+
+<p>
+  <strong>Val fact 2:</strong>
+  <%= @percentage.val_fact_2 %>
+</p>
+
+<p>
+  <strong>Percent fact:</strong>
+  <%= @percentage.percent_fact %>
+</p>
+
+<p>
+  <strong>Val inv 1:</strong>
+  <%= @percentage.val_inv_1 %>
+</p>
+
+<p>
+  <strong>Val inv 2:</strong>
+  <%= @percentage.val_inv_2 %>
+</p>
+
+<p>
+  <strong>Percent inv:</strong>
+  <%= @percentage.percent_inv %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @percentage.group_id %>
+</p>
+
+<%= link_to 'Edit', edit_percentage_path(@percentage) %> |
+<%= link_to 'Back', percentages_path %>

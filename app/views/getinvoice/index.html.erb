@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Заказы <%= @status%></h1>
+
+<p> <%= link_to 'Отгруженные', invoice_path(3) %> </p>
+<p> <%= link_to 'В работе', invoice_path(2) %> </p>
+<p> <%= link_to 'Новые', invoice_path() %> </p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>№ заказа</th>
+      <th>Сумма</th>
+      <th>Телефон</th>
+      <th>email</th>
+      <th>Место выдачи</th>
+      <th>Дата изменения</th>
+      <th>Способ заказ</th>
+      <th>Статус заказа</th>
+      <th colspan = "2" > Действие </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inv.each do |invoice| %>
+      <tr>
+        <td><%= invoice.id %></td>
+        <% if invoice.inv == 1 %>
+        <% @summ = invoice.summ %>
+        <% elsif invoice.inv == 2 %>
+        <% @summ = invoice.summ_n %>
+        <% end %>
+        <td><%= @summ %></td>
+        <td><%= invoice.phone_invoice %></td>
+        <td><%= invoice.email %></td>
+        <% if invoice.status == "new" then %>
+        <% invoice.status = "Новый"%>
+        <% elsif invoice.status == "1" then invoice.status = "Просмотрен"%>
+        <% elsif invoice.status == "2" then invoice.status = "Обработан"%>
+        <% elsif invoice.status == "3" then invoice.status = "Отгружен"%>
+        <% end %>
+        <td><%= invoice.place %></td>
+        <td><%= invoice.updated_at%></td>
+        <% if invoice.inv == 1 then %>
+        <% @inv = "Заказ у поставщика" %>
+        <% elsif invoice.inv == 2 %>
+        <% @inv = "Из наличия" %>
+        <% end %>
+        <td><%= @inv %></td>
+        <td><%= invoice.status %></td>
+        <td><%= link_to 'Обработать', edit_invoice_path(invoice)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Выйти',  destroy_user_session_path, :method => :delete  %>
