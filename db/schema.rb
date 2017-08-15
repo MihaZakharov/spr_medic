@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724103922) do
+ActiveRecord::Schema.define(version: 20170807132605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -64,17 +65,37 @@ ActiveRecord::Schema.define(version: 20170724103922) do
     t.integer  "group_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "pharmacy_id"
   end
 
   create_table "pharmacies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.string   "adress"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "status"
     t.string   "timeopen"
     t.string   "phone"
+    t.integer  "pharmacy_web_id"
+    t.integer  "region_id"
+  end
+
+  create_table "pharmacy_webs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "director"
+    t.string   "phone"
+    t.string   "addres"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "price_avas", force: :cascade do |t|
+    t.integer  "cmp_u"
+    t.decimal  "price"
+    t.integer  "qnt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "prices", force: :cascade do |t|
@@ -83,6 +104,8 @@ ActiveRecord::Schema.define(version: 20170724103922) do
     t.integer  "pharmacy_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.decimal  "price_nal"
+    t.index ["product_id"], name: "prices_product_id_idx", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -95,6 +118,14 @@ ActiveRecord::Schema.define(version: 20170724103922) do
     t.integer  "group_id"
     t.integer  "ext_id"
     t.decimal  "price1"
+    t.index "name gist_trgm_ops", name: "trgm_idx", using: :gist
+    t.index ["id"], name: "idx_id", using: :btree
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rls", force: :cascade do |t|

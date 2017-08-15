@@ -18,6 +18,14 @@ class PercentagesController < ApplicationController
     @percentage = Percentage.new
   end
 
+  def newex
+    @p = params[:id]
+    puts @p
+    @percentage = Percentage.new
+    @percentage.pharmacy_id = @p
+    render 'new'
+  end
+
   # GET /percentages/1/edit
   def edit
   end
@@ -70,6 +78,6 @@ class PercentagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def percentage_params
-      params.require(:percentage).permit(:val_fact_1, :val_fact_2, :percent_fact, :val_inv_1, :val_inv_2, :percent_inv, :group_id)
+      params.require(:percentage).permit(:val_fact_1, :val_fact_2, :percent_fact, :val_inv_1, :val_inv_2, :percent_inv, :group_id, :pharmacy_id)
     end
 end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pharmacy Webs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Director</th>
+      <th>Phone</th>
+      <th>Addres</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pharmacy_webs.each do |pharmacy_web| %>
+      <tr>
+        <td><%= pharmacy_web.name %></td>
+        <td><%= pharmacy_web.director %></td>
+        <td><%= pharmacy_web.phone %></td>
+        <td><%= pharmacy_web.addres %></td>
+        <td><%= link_to 'Show', pharmacy_web %></td>
+        <td><%= link_to 'Edit', edit_pharmacy_web_path(pharmacy_web) %></td>
+        <td><%= link_to 'Destroy', pharmacy_web, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pharmacy Web', new_pharmacy_web_path %>

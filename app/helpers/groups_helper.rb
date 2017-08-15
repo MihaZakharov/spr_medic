@@ -15,24 +15,33 @@ module GroupsHelper
 
 def refKlsCmp
   res=[]
-  rr={}
+  r={}
 	CSV.foreach("klscmp.csv",:quote_char => "\x00", encoding: "windows-1251",col_sep: ',', :headers => true) do |row|
-    rr = {}
+    r = {}
     r = row.to_hash
 #    rr[:cmp] = r["cmp"]
 #    rr[:kls] = r["kls"]
-    res.push(rr)
+if Product.where("id = :p",{p:r["cmp"]}).exists?
+      @p=Product.find_by_id(r["cmp"])
+      @g=Group.find_by_id(r["kls"])
+      if @p != nil and @g != nil
+         @p.groups<<@g
+         @p.save
+      end
+end
+
+#    res.push(r)
   end
-  res.each { |k|
-    if Product.where("id = :p",{p:k[:cmp]}).exists?
-          @p=Product.find_by_id(k[:cmp])
-          @g=Group.find_by_id(k[:kls])
-          if @p != nil and @g != nil
-             @p.groups<<@g
-             @p.save
-          end
-    end
-  }
+
+#  res.each { |k|
+#    if Product.where("id = :p",{p:k[:cmp]}).exists?
+#          @p=Product.find_by_id(k[:cmp])
+##          if @p != nil and @g != nil
+  #           @p.groups<<@g
+#             @p.save
+#          end
+#    end
+#  }
 end
 
   def getkls    # ������ ������ ��������� � ��������������

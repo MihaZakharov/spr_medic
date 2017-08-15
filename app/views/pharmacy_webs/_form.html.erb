@@ -1,0 +1,37 @@
+<%= form_for(pharmacy_web) do |f| %>
+  <% if pharmacy_web.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pharmacy_web.errors.count, "error") %> prohibited this pharmacy_web from being saved:</h2>
+
+      <ul>
+      <% pharmacy_web.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :director %>
+    <%= f.text_field :director %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :addres %>
+    <%= f.text_field :addres %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

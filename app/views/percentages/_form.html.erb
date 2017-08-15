@@ -23,7 +23,7 @@
     <%= f.text_field :val_inv_2, label:"Диапазон заказ до:" %>
 
     <%= f.text_field :percent_inv, label:"Процент наценки заказ" %>
-
+    <%= f.text_field :pharmacy_id, label:"Идентификатор аптеки" %>
     <%= f.select :group_id, Group.where('kls_parent=1613').order("NAME ASC").collect{ |group| [group.name, group.id] }, {label: "Группа товара"}%>
   </div>
 

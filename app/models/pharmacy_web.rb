@@ -1,0 +1,2 @@
+class PharmacyWeb < ApplicationRecord
+end

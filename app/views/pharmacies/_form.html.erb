@@ -1,0 +1,24 @@
+<%= bootstrap_form_for(pharmacy) do |f| %>
+  <% if pharmacy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pharmacy.errors.count, "error") %> prohibited this pharmacy from being saved:</h2>
+
+      <ul>
+      <% pharmacy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name, label:"Полное название" %>
+  </div>
+
+  <%= f.select :region_id, Region.all.collect{|p| [p.name,p.id]}, { label: "Район, в котором находится аптека:" } %>
+
+
+  <div class="actions">
+    <%= f.submit "Обновить" %>
+  </div>
+<% end %>

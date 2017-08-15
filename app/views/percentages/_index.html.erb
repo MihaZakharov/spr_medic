@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Диапазоны наценок по группам товара</h1>
+<p>Если группа товара не указана, то процент наценки распространяется на все товары и имеет низший приоритет</p>
+<p>Как только вы укажите группу товара в диапазон, то приоритет будет выше чем на товары без группы</p>
+
+<table  class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Диапазон факт от:</th>
+      <th>Диапазон факт до:</th>
+      <th>Процент наценки факт:</th>
+      <th>Диапазон факт до:</th>
+      <th>Диапазон факт до:</th>
+      <th>Процент наценки заказ:</th>
+      <th>Группа товара</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @percentages.each do |percentage| %>
+      <tr>
+        <td><%= percentage.val_fact_1 %></td>
+        <td><%= percentage.val_fact_2 %></td>
+        <td><%= percentage.percent_fact %></td>
+        <td><%= percentage.val_inv_1 %></td>
+        <td><%= percentage.val_inv_2 %></td>
+        <td><%= percentage.percent_inv %></td>
+        <td><%= Group.find_by('id=:p',{p:percentage.group_id}).name %></td>
+        <td><%= link_to 'Просмотреть', percentage %></td>
+        <td><%= link_to 'Редактировать', edit_percentage_path(percentage) %></td>
+        <td><%= link_to 'Удалить', percentage, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%=@pharmacy_id%>
+<%= link_to 'Новый диапазон', create_new_for_pharm_path(@pharmacy_id)  %>

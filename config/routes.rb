@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
+  resources :pharmacies
+  resources :regions
+  resources :pharmacy_webs
+  get 'percentages/new_w_pharm/(:id)', to: 'percentages#newex', as: 'create_new_for_pharm'
   resources :percentages
+
  # resources :groups
  root "getinvoice#index"
 devise_scope :user do
@@ -8,7 +14,7 @@ end
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations' }
  # devise_for :users
 #  resources :products
-
+  post 'reg_json', to: 'regions#showalljson'
   get 'products/all(:id)', to: 'products#all'
   post 'products/searching', to: 'products#searching'
   post 'products/detailproduct', to: 'products#dtlprod'
@@ -21,6 +27,7 @@ end
   get 'pharmacies/all(:id)',   to: 'pharmacies#all'
 
   get 'prod_exp/all',   to: 'special_offer#getSpecialOffer'
+  post 'offers',to: 'special_offer#getOffersFromApt'
 
 #  post 'makeinv/:invoice',   to: 'makeinv#all'
   post 'makeinv',   to: 'makeinv#all'

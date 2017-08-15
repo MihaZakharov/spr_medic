@@ -80,6 +80,11 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jwt (1.5.6)
+    knock (2.1.1)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -181,6 +186,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
+  knock
   pg (~> 0.18.4)
   puma (~> 3.0)
   rack-cors

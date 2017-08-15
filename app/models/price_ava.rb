@@ -1,0 +1,2 @@
+class PriceAva < ApplicationRecord
+end

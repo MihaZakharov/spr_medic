@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cmp_u: 1
+  price: 9.99
+  qnt: 1
+
+two:
+  cmp_u: 1
+  price: 9.99
+  qnt: 1

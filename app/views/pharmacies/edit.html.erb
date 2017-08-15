@@ -1,0 +1,10 @@
+<h1>Editing Pharmacy</h1>
+
+<%= render 'form', pharmacy: @pharmacy %>
+
+<% @percentages = Percentage.where('pharmacy_id=:p',{p:@pharmacy.id}).order("group_id,val_fact_1,val_inv_1") %>
+<% @pharmacy_id = @pharmacy.id%>
+<%= render partial: 'percentages/index', locals: {percentages: @percentages,pharmacy_id: @pharmacy_id} %>
+
+<%= link_to 'Show', @pharmacy %> |
+<%= link_to 'Back', pharmacies_path %>
