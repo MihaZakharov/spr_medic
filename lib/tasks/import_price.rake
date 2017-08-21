@@ -57,7 +57,10 @@ namespace :utils do
         @p.phone = record.phone
         @p.adress = record.adress
         @p.description = record.descriptio
+        @p.pharmacy_web_id = record.web
+        @p.region_id = record.reg
         @p.save
+        puts record.name
       else
         @p=Pharmacy.new
         @p.id = record.id
@@ -65,7 +68,10 @@ namespace :utils do
         @p.phone = record.phone
         @p.adress = record.adress
         @p.description = record.descriptio
+        @p.pharmacy_web_id = record.web
+        @p.region_id = record.reg
         @p.save
+        puts record.phone
       end
   end
 end # import_price
@@ -161,12 +167,12 @@ task :import_groups  => :environment do
     end
 end
 
-desc "import price AVA svodni zakaz"
-task :import_price_ava  => :environment do
+desc "import price kiwi svodni zakaz"
+task :import_price_kiwi  => :environment do
   #widgets = DBF::Table.new("price.dbf", nil, 'cp866')
   #  PriceAva.find_by_sql("delete from price_avas")
-  puts 'Cleared'
-  puts 'begin insert all offers'
+  #puts 'Cleared'
+  #puts 'begin insert all offers'
   #widgets.each do |record|
   #  if (record.cmp_u > 0) then
   #    pr=PriceAva.new
@@ -178,7 +184,8 @@ task :import_price_ava  => :environment do
   #end # for each
   puts 'inserted all offers'
   puts 'get min prices and insert or update'
-  PriceAva.find_by_sql('SELECT public."UpdatePriceEx"(\'price_avas\',1);');
+  #second parameter is the pharmacy_web_id
+  PriceAva.find_by_sql('SELECT public."UpdatePriceEx"(\'price_avas\',2);');
   puts 'all prices was update'
 end # price ex
 

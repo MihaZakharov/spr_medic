@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   post 'user_token' => 'user_token#create'
+  get 'pharmacies/all(:id)',   to: 'pharmacies#all'
   resources :pharmacies
   resources :regions
   resources :pharmacy_webs
+
   get 'percentages/new_w_pharm/(:id)', to: 'percentages#newex', as: 'create_new_for_pharm'
   resources :percentages
 
@@ -18,13 +20,13 @@ end
   get 'products/all(:id)', to: 'products#all'
   post 'products/searching', to: 'products#searching'
   post 'products/detailproduct', to: 'products#dtlprod'
-  get 'products/:id',      to: 'products#showproductsfromgroup'
+  post 'products',      to: 'products#showproductsfromgroup'
 
   get 'groups/all',   to: 'groups#all'
   get 'groups/alln',   to: 'groups#alln'
   get 'groups/:id',        to: 'groups#showgrp'
 
-  get 'pharmacies/all(:id)',   to: 'pharmacies#all'
+#  get 'pharmacies/all(:id)',   to: 'pharmacies#all'
 
   get 'prod_exp/all',   to: 'special_offer#getSpecialOffer'
   post 'offers',to: 'special_offer#getOffersFromApt'

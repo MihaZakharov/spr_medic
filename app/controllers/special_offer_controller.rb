@@ -22,6 +22,7 @@ class SpecialOfferController < ApplicationController
   end
 
   def getOffersFromApt
+    #Контроллер для получения предложений по аптекам
     res = []
     buf = {}
     params.require(:product).permit(:product_id,:region_id)
@@ -31,24 +32,27 @@ class SpecialOfferController < ApplicationController
     p.prices.each do |product|
       buf={}
       #Получаю название аптеки и цены
-      buf[:price_nal] = product["price_nal"]
-      buf[:price] = product["price"]
-      buf[:pharmacy_id] = product["pharmacy_id"]
-      pharm = Pharmacy.find_by_id(product["pharmacy_id"])
-      buf[:pharmacy] = pharm.name
-      buf[:pharm_adress] = pharm.adress
-      buf[:pharm_region_id] = pharm.region_id
-      buf[:pharm_timeopen] = pharm.timeopen
-      buf[:pharm_phone] = pharm.phone
-      buf[:pharm_region] = Region.find_by_id(pharm.region_id).name
-      puts  @hash["region_id"]
-      puts  pharm.region_id
-      if (@hash["region_id"].to_s == pharm.region_id.to_s) then
-        res.push(buf)
-      elsif (@hash["region_id"] == "all") then
-        res.push(buf)
+      if Pharmacy.where('id=:p',{p:product["pharmacy_id"]}).exists?
+          buf[:price_nal] = product["price_nal"]
+          buf[:product_id] = product["product_id"]
+          buf[:product_name] = p.name
+          buf[:price] = product["price"]
+          buf[:pharmacy_id] = product["pharmacy_id"]
+          pharm = Pharmacy.find_by_id(product["pharmacy_id"])
+          buf[:pharmacy] = pharm.name
+          buf[:pharm_adress] = pharm.adress
+          buf[:pharm_region_id] = pharm.region_id
+          buf[:pharm_timeopen] = pharm.timeopen
+          buf[:pharm_phone] = pharm.phone
+          buf[:pharm_region] = Region.find_by_id(pharm.region_id).name
+          puts  @hash["region_id"]
+          puts  pharm.region_id
+          if (@hash["region_id"].to_s == pharm.region_id.to_s) then
+            res.push(buf)
+          elsif (@hash["region_id"] == "all") then
+            res.push(buf)
+          end
       end
-
     end
     render json: res
   end

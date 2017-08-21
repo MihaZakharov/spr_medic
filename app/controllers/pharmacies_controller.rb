@@ -21,7 +21,7 @@ class PharmaciesController < ApplicationController
 
   # GET /@Pharmacys/new
   def new
-    @pharmacy = @Pharmacy.new
+    @pharmacy = Pharmacy.new
   end
 
   # GET /@Pharmacys/1/edit
@@ -31,7 +31,7 @@ class PharmaciesController < ApplicationController
   # POST /@Pharmacys
   # POST /@Pharmacys.json
   def create
-    @pharmacy = @Pharmacy.new(pharmacy_params)
+    @pharmacy = Pharmacy.new(pharmacy_params)
 
     respond_to do |format|
       if @pharmacy.save
@@ -76,7 +76,7 @@ class PharmaciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pharmacy_params
-      params.require(:pharmacy).permit(:name,:region_id,:region)
+      params.require(:pharmacy).permit(:name,:region_id,:region,:pharmacy_web_id)
     end
 #,:timeopen,:pharmcy_web_id,:adress,:description,:status,:phone
 end

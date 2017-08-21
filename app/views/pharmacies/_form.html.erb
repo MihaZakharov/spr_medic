@@ -13,6 +13,8 @@
 
   <div class="field">
     <%= f.text_field :name, label:"Полное название" %>
+    <%= f.text_field :pharmacy_web_id, label:"Сеть" %>
+    
   </div>
 
   <%= f.select :region_id, Region.all.collect{|p| [p.name,p.id]}, { label: "Район, в котором находится аптека:" } %>

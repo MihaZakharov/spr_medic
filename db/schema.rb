@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807132605) do
+ActiveRecord::Schema.define(version: 20170818084620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170807132605) do
     t.float    "summ"
     t.decimal  "summ_n"
     t.integer  "inv"
+    t.integer  "pharmacy_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -53,6 +54,10 @@ ActiveRecord::Schema.define(version: 20170807132605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal  "price1"
+  end
+
+  create_table "max_prc", id: false, force: :cascade do |t|
+    t.decimal "max"
   end
 
   create_table "percentages", force: :cascade do |t|
@@ -105,7 +110,7 @@ ActiveRecord::Schema.define(version: 20170807132605) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.decimal  "price_nal"
-    t.index ["product_id"], name: "prices_product_id_idx", using: :btree
+    t.index ["product_id"], name: "idx_price_product_id", using: :hash
   end
 
   create_table "products", force: :cascade do |t|

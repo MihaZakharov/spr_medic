@@ -1,11 +1,12 @@
 class MakeinvController < ApplicationController
+    before_action :authenticate_user
     skip_before_action :verify_authenticity_token
 
    def all
 
 
 
-      params.require(:invoice).permit(:inv,:summ_i,:summ_n,:place,:phone,:status,:email,:number, items: [:goodsid,:price,:name,:qnt])
+      params.require(:invoice).permit(:inv,:summ_i,:summ_n,:place,:phone,:status,:email,:number, items: [:goodsid,:price,:name,:qnt,:pharmacy_id])
 
       @par=params[:invoice].to_json
 
@@ -24,6 +25,7 @@ class MakeinvController < ApplicationController
           @price=@hash["items"][i]["price"]
           @price1=@hash["items"][i]["price1"]
           @qnt=@hash["items"][i]["qnt"]
+          inv.pharmacy_id = @hash["items"][i]["pharmacy_id"]
           items.goodsid=@goodsid
           items.price=@price
           items.price1=@price1
