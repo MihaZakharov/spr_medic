@@ -8,7 +8,18 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+     address:              'smtp.mail.ru',
+     port:                 '465',
+     user_name:            'mihail.zaharov84@mail.ru',
+     password:             '',
+     authentication:       :plain,
+     enable_starttls_auto: true,
+     openssl_verify_mode:  'none',
+     ssl:                   true,
+     tls:                   true
+ }
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -27,7 +38,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 

@@ -8,6 +8,32 @@
     <p>
       Вам пришел заказ от покупателя: <%= @invoice.email %>.<br>
     </p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Наименование товара</th>
+          <th>Количество</th>
+          <th>Цена</th>
+          <th>Сумма</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @dtlinv.each do |invoice| %>
+          <tr>
+            <td><%= invoice[:name] %></td>
+            <td><%= invoice[:qnt] %></td>
+            <% if @inv.inv == 1 %>
+            <% @price = invoice[:price1] %>
+            <% elsif @inv.inv == 2 %>
+            <% @price = invoice[:price] %>
+            <% end %>
+            <td><%= @price %></td>
+            <td><%= @price * invoice[:qnt]  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <p>
       Перейти по сслыке что бы открыть заказ: <%= @url %>.
     </p>

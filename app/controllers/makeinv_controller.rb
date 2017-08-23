@@ -33,7 +33,7 @@ class MakeinvController < ApplicationController
           inv.items << items
           inv.save
       end
-      InvoiceMailer.mailer(inv).deliver_later
+      InvoiceMailer.mailer(inv).deliver_now
 
       render body: @par
    end

@@ -36,7 +36,7 @@ class SpecialOfferController < ApplicationController
           buf[:price_nal] = product["price_nal"]
           buf[:product_id] = product["product_id"]
           buf[:product_name] = p.name
-          buf[:price] = product["price"]
+          buf[:price] = product["price"].round
           buf[:pharmacy_id] = product["pharmacy_id"]
           pharm = Pharmacy.find_by_id(product["pharmacy_id"])
           buf[:pharmacy] = pharm.name
