@@ -95,17 +95,17 @@ end # import_offers
 
 desc "import products and groups references"
 task :import_prod_groups_ref => :environment do
-#  CSV.foreach("CMP.csv",:quote_char => "\x00",col_sep: ';', :headers => true) do |row| # encoding: "windows-1251",
-#    r = row.to_hash
-#    if not Product.where(:id => r["nnt"]).exists?
-#      @p=Product.new
-#      @p.id = r["nnt"]
-#      @p.name = r["name"]
-##      @p.price1=r["price1"]
-#      @p.ext_id = r["ext_id"]
-#      @p.save
-#    end #if exit
-#  end # foreach
+  CSV.foreach("CMP.csv",:quote_char => "\x00",col_sep: ';', :headers => true) do |row| # encoding: "windows-1251",
+    r = row.to_hash
+    if not Product.where(:id => r["nnt"]).exists?
+      @p=Product.new
+      @p.id = r["nnt"]
+      @p.name = r["name"]
+#      @p.price1=r["price1"]
+      @p.ext_id = r["ext_id"]
+      @p.save
+    end #if exit
+  end # foreach
 
   res=[]
   rr={}
