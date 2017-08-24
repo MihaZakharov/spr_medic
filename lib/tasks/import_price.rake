@@ -115,22 +115,30 @@ task :import_prod_groups_ref => :environment do
     r = row.to_hash
     rr[:cmp] = r["cmp"]
     rr[:kls] = r["kls"]
-#     puts r["cmp"]
-#     puts r["kls"]
-    res.push(rr)
-  end
-  puts "add all to hash"
-  puts "begin import"
-  res.each { |k|
-    if Product.where("id = :p",{p:k[:cmp]}).exists?
-          @p=Product.find_by_id(k[:cmp])
-          @g=Group.find_by_id(k[:kls])
+    if Product.where("id = :p",{p:rr[:cmp]}).exists?
+          @p=Product.find_by_id(rr[:cmp])
+          @g=Group.find_by_id(rr[:kls])
           if @p != nil and @g != nil
              @p.groups<<@g
              @p.save
           end
     end
-  }
+#     puts r["cmp"]
+#     puts r["kls"]
+#    res.push(rr)
+  end
+  puts "add all to hash"
+  puts "begin import"
+#  res.each { |k|
+#    if Product.where("id = :p",{p:k[:cmp]}).exists?
+#          @p=Product.find_by_id(k[:cmp])
+#          @g=Group.find_by_id(k[:kls])
+#          if @p != nil and @g != nil
+#             @p.groups<<@g
+#             @p.save
+#          end
+#    end
+#  }
 
 
 end # impor_cmp
