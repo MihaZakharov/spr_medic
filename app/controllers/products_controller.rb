@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :authenticate_user
+    #before_action :authenticate_user
     skip_before_action :verify_authenticity_token
 
 def getdetailproduct
@@ -40,8 +40,8 @@ end
 
   end
 
-  def all
-
+  def index
+    @products=Product.limit(100)
   end
 
   def dtlprod

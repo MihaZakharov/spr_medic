@@ -17,11 +17,11 @@ end
  # devise_for :users
 #  resources :products
   post 'reg_json', to: 'regions#showalljson'
-  get 'products/all(:id)', to: 'products#all'
+  get 'products/all', to: 'products#index'
   post 'products/searching', to: 'products#searching'
   post 'products/detailproduct', to: 'products#dtlprod'
   post 'products',      to: 'products#showproductsfromgroup'
-
+  resources :products
   get 'groups/all',   to: 'groups#all'
   get 'groups/alln',   to: 'groups#alln'
   get 'groups/:id',        to: 'groups#showgrp'
