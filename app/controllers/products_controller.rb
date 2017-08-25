@@ -41,7 +41,7 @@ end
   end
 
   def index
-    @products=Product.limit(100)
+    @products=Product.limit(5000)
   end
 
   def dtlprod
