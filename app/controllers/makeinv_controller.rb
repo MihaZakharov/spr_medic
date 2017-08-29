@@ -6,7 +6,7 @@ class MakeinvController < ApplicationController
 
 
 
-      params.require(:invoice).permit(:inv,:summ_i,:summ_n,:place,:phone,:status,:email,:number, items: [:goodsid,:price,:name,:qnt,:pharmacy_id])
+      params.require(:invoice).permit(:inv,:summ_i,:summ_n,:place,:phone,:status,:email,:number, items: [:is_nal,:goodsid,:price,:product_name,:qnt,:pharmacy_id,:pharmacy_name,:price,:price1])
 
       @par=params[:invoice].to_json
 
