@@ -33,7 +33,13 @@ class SpecialOfferController < ApplicationController
       buf={}
       #Получаю название аптеки и цены
       if Pharmacy.where('id=:p',{p:product["pharmacy_id"]}).exists?
-          buf[:price_nal] = product["price_nal"]
+          puts 'price'
+          puts product["price_nal"]
+          if product["price_nal"] != nil then
+            buf[:price_nal] = product["price_nal"].round
+          else
+            buf[:price_nal] = 'Н/Д'
+          end
           buf[:product_id] = product["product_id"]
           buf[:product_name] = p.name
           buf[:price] = product["price"].round

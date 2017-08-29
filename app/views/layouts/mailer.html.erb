@@ -4,10 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1> Поступил новый заказ, <%= @invoice.id %></h1>
+    <h1> Поступил новый заказ №<%= @invoice.id %></h1>
     <p>
-      Вам пришел заказ от покупателя: <%= @invoice.email %>.<br>
+      Вам пришел заказ от покупателя:
     </p>
+    E-mail: <%= @invoice.email %>.<br>
+    Телефон: <%= @invoice.phone_invoice %>.<br>
     <table class="table table-bordered">
       <thead>
         <tr>
