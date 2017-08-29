@@ -38,7 +38,7 @@ class SpecialOfferController < ApplicationController
           if product["price_nal"] != nil then
             buf[:price_nal] = product["price_nal"].round
           else
-            buf[:price_nal] = 'Н/Д'
+            buf[:price_nal] = '0'
           end
           buf[:product_id] = product["product_id"]
           buf[:product_name] = p.name
