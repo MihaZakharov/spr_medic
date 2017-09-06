@@ -3,7 +3,7 @@
 <%= form_tag(controller: "getinvoice", action: "change", method: "get") do %>
    <%= label_tag(:idinv, "Статус") %>
    <%= hidden_field_tag(:id, @inv.id) %>
-    <%= select_tag(:value, options_for_select([["Новый","new"],["Просмотрен",1] ,["Обработан",2],["Отгружен",3] ],selected:@inv.status))  %>
+    <%= select_tag(:value, options_for_select([["Новый","new"],["Просмотрен",1] ,["Обработан",2],["Отгружен",3],["Отказ",4] ],selected:@inv.status))  %>
    <%= submit_tag("Обработать")%>
 <% end %>
 

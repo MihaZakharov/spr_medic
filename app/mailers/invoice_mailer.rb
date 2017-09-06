@@ -1,7 +1,7 @@
 class InvoiceMailer < ApplicationMailer
   default from: "mihail.zaharov84@mail.ru"
   layout "mailer"
-  def mailer(invoice)
+  def mailer(invoice,usr)
     @invoice = invoice
     @url = 'http://134.0.119.2/getinvoice/'+@invoice.id.to_s+'/edit'
     #@user = "mihail.zaharov84@mail.ru"
@@ -22,7 +22,8 @@ class InvoiceMailer < ApplicationMailer
     end
     @dtlinv = res
 
-    mail(to: @user, subject: 'Поступил новый заказ')
+       mail(to: usr, subject: 'Поступил новый заказ')
+
   end
 
 end

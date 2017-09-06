@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_scope :user do
+    get 'users/show', to: 'users/registrations#show'
+  end
+    devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations' }
+
   post 'user_token' => 'user_token#create'
   get 'pharmacies/all(:id)',   to: 'pharmacies#all'
   resources :pharmacies
@@ -10,10 +15,6 @@ Rails.application.routes.draw do
 
  # resources :groups
  root "getinvoice#index"
-devise_scope :user do
-  get 'users/show', to: 'users/registrations#show'
-end
-  devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations' }
  # devise_for :users
 #  resources :products
   post 'reg_json', to: 'regions#showalljson'
@@ -33,8 +34,8 @@ end
 
 #  post 'makeinv/:invoice',   to: 'makeinv#all'
   post 'makeinv',   to: 'makeinv#all'
-  post 'getinvoice',        to: 'getinvoice#showinv'
-  post 'getinvoice/detail',        to: 'getinvoice#showdetailinvoice'
+  post 'get_invoice_api',        to: 'get_invoice_api#showinv'
+  post 'get_invoice_api/detail',        to: 'get_invoice_api#showdetailinvoice'
   #site
    get  'getinvoice/(:fltr)/showall', to: 'getinvoice#index' , as: :invoice
    get  'getinvoice/:id/edit', to: 'getinvoice#edit', as: :edit_invoice

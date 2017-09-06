@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Заказы <%= @status%></h1>
-
+<p> <%= link_to 'Отказы', invoice_path(4) %> </p>
 <p> <%= link_to 'Отгруженные', invoice_path(3) %> </p>
 <p> <%= link_to 'В работе', invoice_path(2) %> </p>
 <p> <%= link_to 'Новые', invoice_path() %> </p>
+
 
 <table class="table table-bordered">
   <thead>
@@ -38,8 +39,9 @@
         <% elsif invoice.status == "1" then invoice.status = "Просмотрен"%>
         <% elsif invoice.status == "2" then invoice.status = "Обработан"%>
         <% elsif invoice.status == "3" then invoice.status = "Отгружен"%>
+        <% elsif invoice.status == "4" then invoice.status = "Отказ"%>
         <% end %>
-        <td><%= invoice.place %></td>
+        <td><%= invoice.pharmacy.name %></td>
         <td><%= invoice.updated_at%></td>
         <% if invoice.inv == 1 then %>
         <% @inv = "Заказ у поставщика" %>

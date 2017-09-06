@@ -1,19 +1,39 @@
 class GetinvoiceController < ApplicationController
-    skip_before_action :verify_authenticity_token
-    before_action :authenticate_user!,only: [:index,:change,:edit]
+
+    #skip_before_action :verify_authenticity_token
+    before_filter :authenticate_user!,only: [:index,:change,:edit]
+    #protect_from_forgery with: :exception
+    #include Knock::Authenticable
+    #undef_method :current_user
+
+    #before_action :finduser
+    #before_action :authenticate_api,only: [:showinv]
+
+
 
 def index
-   if params[:fltr] == "3" then
-      @inv = Invoice.all.where("status = '3'")
-      @status = "Отгруженные"
-    elsif params[:fltr] == "2"
-      @inv = Invoice.all.where("status = '2'").order("status DeSC")
-      @status = "В работе"
-    else
-      @inv = Invoice.all.where("status not in ('2','3')").order("status DeSC")
-      @status = "Новые"
-   end
+       #Получаем все заказы для пользователя, который закреплен за одной или нескольких аптек
 
+  #      current_user =  User.find_by_authentication_token(params[:authenticity_token])
+       if params[:fltr] == "3" then
+          @inv = Invoice.all.where("status = '3' and pharmacy_id in (:ph_id)",ph_id: Pharmacy.where('user_id=:p',p:current_user.id).map{ |ph| ph.id })
+          #@inv = Invoice.all.where("status = '3'")
+          @status = "Отгруженные"
+        elsif params[:fltr] == "4"
+          @inv = Invoice.all.where("status = '4'  and pharmacy_id in (:ph_id)",ph_id: Pharmacy.where('user_id=:p',p:current_user.id).map{ |ph| ph.id })
+          #@inv = Invoice.all.where("status = '2'").order("status DeSC")
+          @status = "Отказ"
+        elsif params[:fltr] == "2"
+          @inv = Invoice.all.where("status = '2'  and pharmacy_id in (:ph_id)",ph_id: Pharmacy.where('user_id=:p',p:current_user.id).map{ |ph| ph.id })
+          #@inv = Invoice.all.where("status = '2'").order("status DeSC")
+          @status = "В работе"
+        else
+          @inv = Invoice.all.where("status not in ('2','3','4') and pharmacy_id in (:ph_id)",ph_id: Pharmacy.where('user_id=:p',p:current_user.id).map{ |ph| ph.id })
+          #@inv = Invoice.all.where("status not in ('2','3')").order("status DeSC")
+          @status = "Новые"
+       end
+
+   #render json: @user
 end
 
 def change
@@ -51,55 +71,14 @@ end
 
 
 
-   def showinv
-      params.require(:invoices).permit(:phone,:code,:email)
-      @par = params[:invoices].to_json
-      @hash = JSON.parse(@par)
-      @phone = @hash["phone"]
-      @email = @hash["email"]
-      res=[]
-      buf={}
-      Invoice.all.where("email = :email AND phone_invoice = :phone",email: @email, phone: @phone).each do |inv|
-	buf={}
-	buf[:email] = inv.email
-	buf[:id] = inv.id
-  if inv.inv == 1
-    buf[:summ] = inv.summ
-  else
-    buf[:summ] = inv.summ_n
+
+
+  private
+
+  def authenticate_api
+  #  protect_from_forgery with: :exception
+    #undef_method :current_user
   end
-
-	buf[:status] = inv.status
-	buf[:place] = inv.place
-	buf[:updated_at] = inv.updated_at.to_s(:db)
-
-	res.push(buf)
-      end
-      render  json: res
-
-   end
-
-	def showdetailinvoice
-      		res=[]
-	        buf={}
-	        params.require(:invoices).permit(:number_invoice)
-		@par = params[:invoices].to_json
-		@hash = JSON.parse(@par)
-		@number_invoice = @hash["number_invoice"]
-		inv = Invoice.find_by_id(@number_invoice)
-#		items = inv.items
-		hash = {}
-		inv.items.each do |prod|
-			buf = {}
-			name_prod = Product.find_by_id(prod.goodsid)
-			buf[:name] = name_prod.name
-			buf[:goodsid] = prod.goodsid
-			buf[:price] = prod.price
-			buf[:qnt] = prod.qnt
-			res.push(buf)
-		end
-		render json: res
-	end
 
 #http://localhost:3000/getinvoice/
 

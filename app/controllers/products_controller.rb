@@ -1,6 +1,14 @@
 class ProductsController < ApplicationController
-    #before_action :authenticate_user
+
+  protect_from_forgery with: :exception
+  include Knock::Authenticable
+  undef_method :current_user
+
+
     skip_before_action :verify_authenticity_token
+    before_action :authenticate_user
+
+
 
 def getdetailproduct
    @hash = params[:id].to_json
@@ -55,8 +63,9 @@ end
     # resp = Product.where(" to_tsvector('russian',name) @@ to_tsquery('russian',?)",@par)
     # if not resp.exists?
         #resp = Product.where(' similarity(name,?)>0.1',@par)
+
         resp =Product.connection.select_all('select name,id,min_prc,max_prc,cnt_pharmacies from public."GetMinMaxPricesAndOffers"(\''+@par+'\')')
-        puts @par
+
      #end
      res=[]
      buf={}

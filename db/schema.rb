@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818084620) do
+ActiveRecord::Schema.define(version: 20170904100000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,7 @@ ActiveRecord::Schema.define(version: 20170818084620) do
   create_table "groups_products", force: :cascade do |t|
     t.integer "product_id"
     t.integer "group_id"
-    t.index ["group_id"], name: "index_groups_products_on_group_id", using: :btree
-    t.index ["product_id"], name: "index_groups_products_on_product_id", using: :btree
+    t.index ["product_id", "group_id"], name: "prices_grp_prod_idx", using: :btree
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -44,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170818084620) do
     t.decimal  "summ_n"
     t.integer  "inv"
     t.integer  "pharmacy_id"
+    t.integer  "user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170818084620) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "pharmacy_id"
+    t.index ["group_id", "pharmacy_id"], name: "grp_prod_idx", using: :btree
   end
 
   create_table "pharmacies", force: :cascade do |t|
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170818084620) do
     t.string   "phone"
     t.integer  "pharmacy_web_id"
     t.integer  "region_id"
+    t.integer  "user_id"
   end
 
   create_table "pharmacy_webs", force: :cascade do |t|
@@ -110,7 +112,8 @@ ActiveRecord::Schema.define(version: 20170818084620) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.decimal  "price_nal"
-    t.index ["product_id"], name: "idx_price_product_id", using: :hash
+    t.index ["product_id", "pharmacy_id"], name: "prices_prod_pharm_idx", using: :btree
+    t.index ["product_id"], name: "idx_product_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
