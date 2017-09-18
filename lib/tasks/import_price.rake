@@ -197,4 +197,26 @@ task :import_price_kiwi  => :environment do
   puts 'all prices was update'
 end # price ex
 
+desc "import price istok-pharma svodni zakaz"
+task :import_price_istok  => :environment do
+  widgets = DBF::Table.new("price.dbf", nil, 'cp866')
+    PriceAva.find_by_sql("delete from price_avas")
+  puts 'Cleared'
+  puts 'begin insert all offers'
+  widgets.each do |record|
+    if (record.cmp_u > 0) then
+      pr=PriceAva.new
+      pr.cmp_u=record.cmp_u
+      pr.price=record.price1
+      pr.qnt=record.qnt
+      pr.save
+    end #if
+  end # for each
+  puts 'inserted all offers'
+  puts 'get min prices and insert or update'
+  #second parameter is the pharmacy_web_id
+  PriceAva.find_by_sql('SELECT public."UpdatePriceEx"(\'price_avas\',3);');
+  puts 'all prices was update'
+end # price ex
+
 end
